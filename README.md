@@ -41,7 +41,7 @@ A Flask REST API for managing students, faculty, courses, enrollments and grades
 
 ## 2. Project Workflow
 
-The project moves through seven stages. Each stage was built on its own Git branch and merged into `main` through a pull request.
+The project moves through six stages. Each stage was built on its own Git branch and merged into `main` through a pull request.
 
 | Stage | Branch | What happens |
 |-------|--------|--------------|
