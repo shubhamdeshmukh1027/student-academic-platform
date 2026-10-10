@@ -398,17 +398,15 @@ kubectl version --client
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| GET | `/` | Application root |
 | GET | `/api/health` | Service health check |
 | GET | `/api/students` | List all students |
-| GET | `/api/students/<id>` | Get one student |
 | POST | `/api/students` | Create a student |
-| GET | `/api/students/<id>/gpa` | Calculate a student's GPA |
-| GET | `/api/faculty` | List all faculty |
+| GET | `/api/students/<sid>` | Get one student |
+| GET | `/api/students/<sid>/gpa` | Calculate a student's GPA |
 | GET | `/api/courses` | List all courses |
-| GET | `/api/enrollments` | List all enrollments |
-| POST | `/api/enrollments` | Enroll a student in a course |
-| GET | `/api/grades` | List all grades |
-| POST | `/api/grades` | Assign a grade to an enrollment |
+| POST | `/api/enroll` | Enroll a student in a course |
+| POST | `/api/grades` | Assign a grade |
 
 **Health response:**
 
@@ -418,12 +416,18 @@ kubectl version --client
 
 **Business rule:** an enrollment is rejected if it would exceed **18 credits** in a semester or conflicts with an existing enrollment.
 
-**Example request:**
+**Example requests:**
 
 ```bash
-curl -X POST http://localhost:5000/api/enrollments \
-  -H "Content-Type: application/json" \
-  -d '{"student_id": 1, "course_id": 101}'
+curl http://localhost:5000/api/health
+curl http://localhost:5000/api/students
+curl http://localhost:5000/api/courses
+```
+
+Replace `<sid>` with a student ID from the `/api/students` response, for example:
+
+```bash
+curl http://localhost:5000/api/students/<sid>/gpa
 ```
 
 ## 12. Troubleshooting
